@@ -1,0 +1,28 @@
+LesPlates\Permanences\Domain\Benevole:
+    type: entity
+    table: benevole
+    repositoryClass: LesPlates\Permanences\Infrastructure\DoctrineBenevoleRepository
+    id:
+        id:
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        recoitNotificationsParEmail:
+            type: boolean
+            nullable: true
+        recoitNotificationsParTelephone:
+            type: boolean
+            nullable: true
+        email:
+            type: string
+            nullable: true
+        nom:
+            type: string
+            nullable: true
+        telephoneMobile:
+            type: string
+            nullable: true
+    lifecycleCallbacks: {  }

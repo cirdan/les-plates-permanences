@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="moyens-contact-form">
+        <h1>Qui est-tu ?</h1>
+        {{ form_start(form) }}
+        <p>Pour savoir qui va venir il nous faut ton nom :</p>
+        {{ form_widget(form.nom,{"attr": {"placeholder": "Exemple : Bernard Martin"}}) }}
+        <p>
+            Nous pouvons t'envoyer des rappels automatiquement !<br />
+            Pour les recevoir, il te suffit de cocher les cases ci-dessous
+        </p>
+        <div>
+            <label>{{ form_widget(form.notificationsParEmail,{"attr": {"class": "checkbox"}}) }} Me rappeler mes permanences par email à :</label><br />
+            {{ form_widget(form.email,{"attr": {"placeholder": "Exemple : bernard.martin@gmail.com"}}) }}
+        </div>
+        <div>
+            <label>{{ form_widget(form.notificationsParTelephone,{"attr": {"class": "checkbox"}}) }} Me rappeler mes permanences par SMS au :</label><br />
+            {{ form_widget(form.telephoneMobile,{"attr": {"placeholder": "Exemple : 01 02 03 04 05"}}) }}
+        </div>
+        <div>
+            {{ form_widget(form.save,{"attr": {"class": "btn--primary"}}) }}
+            <a class="btn" href="{{ path("home") }}">Annuler</a>
+        </div>
+        {{ form_rest(form) }}
+        <p>Bien évidemment, nous n'utiliserons ces données que pour ces rappels, en aucun cas pour d'autres sollicitations...</p>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

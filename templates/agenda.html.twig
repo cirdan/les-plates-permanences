@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for journee in agenda.listeJournees %}
+        <div class="journee">
+            <div class="date">
+                <div class="jour">{{ journee.date|localizeddate('none', 'none', 'fr', null, 'EEE') }}</div>
+                <div class="dateDuJour">{{ journee.date|localizeddate('none', 'none', 'fr', null, 'd MMM') }}</div>
+            </div>
+            <div class="detailJournee">
+                <div class="creneaux">
+                    {% if journee.engagementCreneau1 %}
+                        <div class="creneau creneau1 creneau-me"></div>
+                    {% else %}
+                        <div class="creneau creneau1 creneau-needed"></div>
+                    {% endif %}
+                    {% if journee.engagementCreneau2 %}
+                        <div class="creneau creneau2 creneau-me"></div>
+                    {% else %}
+                        <div class="creneau creneau2 creneau-needed"></div>
+                    {% endif %}
+                </div>
+                <div class="plage">
+                    <div class="heureDebut heure">{{ journee.heureDebut }}</div>
+                    <div class="heureMilieu heure">{{ journee.heureMilieu }}</div>
+                    <div class="heureFin heure">{{ journee.heureFin }}</div>
+                </div>
+                <div class="boutons">
+                    {% if journee.engagementCreneau1 %}
+                        <a href="{{ path('annuler_engagement', {'uuid': journee.engagementCreneau1.id}) }}" class="bouton1 bouton creneau-me"><div class="linksContainer"><div class="icon">✅</div><div>Je me suis engagé</div></div></a>
+                    {% else %}
+                        <a href="{{ path('creer_engagement', {'date': journee.date, 'heureDebut':journee.heureDebut, 'heureFin':journee.heureMilieu}) }}" class="bouton1 bouton creneau-needed"><div class="linksContainer">Je m'engage à venir</div></a>
+                    {% endif %}
+                    {% if journee.engagementCreneau2 %}
+                    <a href="{{ path('annuler_engagement', {'uuid': journee.engagementCreneau2.id}) }}" class="bouton2 bouton creneau-me"><div class="linksContainer"><div class="icon">✅</div><div>Je me suis engagé</div></div></a>
+                    {% else %}
+                    <a href="{{ path('creer_engagement', {'date': journee.date, 'heureDebut':journee.heureMilieu, 'heureFin':journee.heureFin}) }}" class="bouton2 bouton creneau-needed"><div class="linksContainer">Je m'engage à venir</div></a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

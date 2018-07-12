@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+    <body>
+    <header class="grid-2 has-gutter">
+        <div class="txtcenter"><img src="/images/logo.png" class="logo" /></div>
+        {% if benevole.nom  is defined %}
+        <div class="txtcenter">
+            {{ benevole.nom }}<br />
+            <a href="{{ url("benevole_gerer_notifications") }}">Gerer mes notifications</a>
+        </div>
+        {% endif %}
+    </header>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert--{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

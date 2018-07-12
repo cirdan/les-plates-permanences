@@ -1,0 +1,27 @@
+LesPlates\Permanences\Domain\Engagement:
+    type: entity
+    table: engagement
+    repositoryClass: LesPlates\Permanences\Infrastructure\DoctrineEngagementRepository
+    id:
+        id:
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        debut:
+            type: datetime
+        fin:
+            type: datetime
+    manyToOne:
+        benevole:
+            targetEntity: LesPlates\Permanences\Domain\Benevole
+            joinColumn:
+                name: benevole_id
+                referencedColumnName: id
+            cascade: [persist]
+    lifecycleCallbacks:
+        postLoad: [__wakeup]
+
+
