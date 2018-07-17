@@ -36,7 +36,6 @@ class EngagementControllerTest extends WebTestCase
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/');
-        $nbBoutons=$crawler->filter('a.bouton.creneau-needed')->count();
         $link = $crawler
             ->filter('a.bouton.creneau-needed')
             ->eq(0) // select the first link in the list
@@ -44,7 +43,7 @@ class EngagementControllerTest extends WebTestCase
         $crawler = $client->click($link);
         $this->assertEquals(
             1,
-            $crawler->filter('html:contains("Il nous faut un nom")')->count()
+            $crawler->filter('html:contains("il nous faut ton nom")')->count()
         );
     }
     public function test_on_peut_annuler_un_engagement_pour_un_creneau()
@@ -72,7 +71,7 @@ class EngagementControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
         $this->assertEquals(
             1,
-            $crawler->filter('html:contains("'.$this->benevole->id().'")')->count()
+            $crawler->filter('html:contains("Gérer mes notifications")')->count()
         );
     }
 
