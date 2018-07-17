@@ -19,11 +19,13 @@ variables:
 hooks:
     build: |
         bin/console assets:install --no-debug
-        yarn run encore
+        yarn install
+        yarn run encore production
         bin/console cache:clear
     deploy: |
         bin/console assets:install --symlink --relative public
-        yarn run encore dev
+        yarn install
+        yarn run encore production
         bin/console cache:clear
 
 # The relationships of the application with services or other applications.
@@ -35,6 +37,11 @@ relationships:
 
 # The size of the persistent disk of the application (in MB).
 disk: 2048
+
+dependencies:
+    nodejs:
+        yarn: "*"
+        gulp-cli: "*"
 
 # The mounts that will be performed when the package is deployed.
 mounts:
